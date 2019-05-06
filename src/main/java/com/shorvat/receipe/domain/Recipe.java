@@ -18,8 +18,9 @@ public class Recipe {
     private String source;
     private String url;
     private String directions;
-    // todo add
-    // private Difficulty difficulty;
+
+
+
 
     // OneToMany relationship from Recipe to Ingredient (One Recipe many Ingredients)
     // Receipe will be the owner of relationship, ingredient will not be able to navigate back to Recipe
@@ -29,6 +30,20 @@ public class Recipe {
     @Lob // will be created as a blob in a DB.
     private Byte[] image;
 
+    @Enumerated(value = EnumType.STRING)
+    private Difficulty difficulty;
+
+    @OneToOne(cascade = CascadeType.ALL) // Recipe will be owner of this persistance, by deleting Receipe the Note will be deleted too.
+    private Notes notes;
+
+    @ManyToMany
+    @JoinTable(name = "recipe_category",
+        joinColumns = @JoinColumn(name = "recipe_id"), // this side
+            inverseJoinColumns = @JoinColumn(name="category_id")) // other side
+    private Set<Category> categories;
+
+
+
 
     public Long getId() {
         return id;
@@ -37,9 +52,6 @@ public class Recipe {
     public void setId(Long id) {
         this.id = id;
     }
-
-    @OneToOne(cascade = CascadeType.ALL) // Recipe will be owner of this persistance, by deleting Receipe the Note will be deleted too.
-    private Notes notes;
 
     public String getDescription() {
         return description;
@@ -119,5 +131,21 @@ public class Recipe {
 
     public void setIngredients(Set<Ingredient> ingredients) {
         this.ingredients = ingredients;
+    }
+
+    public Difficulty getDifficulty() {
+        return difficulty;
+    }
+
+    public void setDifficulty(Difficulty difficulty) {
+        this.difficulty = difficulty;
+    }
+
+    public Set<Category> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(Set<Category> categories) {
+        this.categories = categories;
     }
 }
