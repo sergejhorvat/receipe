@@ -33,7 +33,7 @@ public class Recipe {
     @Enumerated(value = EnumType.STRING)
     private Difficulty difficulty;
 
-    @OneToOne(cascade = CascadeType.ALL) // Recipe will be owner of this persistance, by deleting Receipe the Note will be deleted too.
+    @OneToOne(cascade = CascadeType.ALL) // Recipe will be owner of this perzistance, by deleting Receipe the Note will be deleted too.
     private Notes notes;
 
     @ManyToMany
