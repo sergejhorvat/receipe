@@ -18,12 +18,19 @@ public class Ingredient {
     @OneToOne(fetch = FetchType.EAGER) // Load every time.
     private UnitOfMeasure uom;
 
-    public Ingredient(String description, BigDecimal amount, UnitOfMeasure uom, Recipe recipe) {
+    public Ingredient(String description, BigDecimal amount, UnitOfMeasure uom) {
+        this.description = description;
+        this.amount = amount;
+        this.uom = uom;
+    }
+
+    // Removed recipe from constructor, we have defined relationship in Recipe class in addIngredients method
+    /*public Ingredient(String description, BigDecimal amount, UnitOfMeasure uom, Recipe recipe) {
         this.description = description;
         this.amount = amount;
         this.recipe = recipe;
         this.uom = uom;
-    }
+    }*/
 
     public Long getId() {
         return id;

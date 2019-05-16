@@ -126,6 +126,13 @@ public class Recipe {
 
     public void setNotes(Notes notes) {
         this.notes = notes;
+        notes.setReceipe(this); // added to create bidirectional relationship between Notes nad Recipe while setting Note for recipe
+    }
+
+    public Recipe addIngredient(Ingredient ingredient){
+        this.ingredients.add(ingredient);
+        ingredient.setRecipe(this);  // added to encapsulated logic in one place for bidirectional relationship
+        return this;
     }
 
     public Set<Ingredient> getIngredients() {

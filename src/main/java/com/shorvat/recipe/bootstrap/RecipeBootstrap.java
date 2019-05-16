@@ -130,15 +130,15 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
         );
 
         // bidirectional relationship
-        guacamoleNote.setReceipe(guacamoleRecipe);
+        //guacamoleNote.setReceipe(guacamoleRecipe); // relationshiop added in addIngredient method of Recipe Class
         guacamoleRecipe.setNotes(guacamoleNote); // set relations
 
         // set ingredients
-        guacamoleRecipe.getIngredients().add(new Ingredient("ripe avocado",new BigDecimal(2),eachUom,guacamoleRecipe));
-        guacamoleRecipe.getIngredients().add(new Ingredient("Kosher salt", new BigDecimal(.5),teaSpoonUom,guacamoleRecipe));
-        guacamoleRecipe.getIngredients().add(new Ingredient("fresh lemon jucie", new BigDecimal(2),tableSpoonUom,guacamoleRecipe));
-        guacamoleRecipe.getIngredients().add(new Ingredient("minced red onion",new BigDecimal(2),tableSpoonUom,guacamoleRecipe));
-        guacamoleRecipe.getIngredients().add(new Ingredient("serano chilles",new BigDecimal(2),eachUom,guacamoleRecipe));
+        guacamoleRecipe.addIngredient(new Ingredient("ripe avocado",new BigDecimal(2),eachUom));
+        guacamoleRecipe.addIngredient(new Ingredient("Kosher salt", new BigDecimal(.5),teaSpoonUom));
+        guacamoleRecipe.addIngredient(new Ingredient("fresh lemon jucie", new BigDecimal(2),tableSpoonUom));
+        guacamoleRecipe.addIngredient(new Ingredient("minced red onion",new BigDecimal(2),tableSpoonUom));
+        guacamoleRecipe.addIngredient(new Ingredient("serano chilles",new BigDecimal(2),eachUom));
 
         guacamoleRecipe.getCategories().add(americanCategory);
         guacamoleRecipe.getCategories().add(mexicanCategory);
@@ -178,20 +178,20 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
                 "\n" +
                 "Read more: http://www.simplyrecipes.com/recipes/spicy_grilled_chicken_tacos/#ixzz4jvu7Q0MJ");
         // bidirectional relationship
-        tacoNotes.setReceipe(tacosRecipe);
+        //tacoNotes.setReceipe(tacosRecipe); // relationship added in addIngredient method
         tacosRecipe.setNotes(tacoNotes);
 
 
-        tacosRecipe.getIngredients().add(new Ingredient("Ancho Chili Powder", new BigDecimal(2), teaSpoonUom,tacosRecipe));
-        tacosRecipe.getIngredients().add(new Ingredient("Dried Oregano", new BigDecimal(1), teaSpoonUom,tacosRecipe));
-        tacosRecipe.getIngredients().add(new Ingredient("Dried Cumin", new BigDecimal(1), teaSpoonUom,tacosRecipe));
-        tacosRecipe.getIngredients().add(new Ingredient("Sugar", new BigDecimal(1), teaSpoonUom,tacosRecipe));
-        tacosRecipe.getIngredients().add(new Ingredient("Salt", new BigDecimal(".5"), teaSpoonUom,tacosRecipe));
-        tacosRecipe.getIngredients().add(new Ingredient("Clove of Garlic, Choppedr", new BigDecimal(1), eachUom,tacosRecipe));
-        tacosRecipe.getIngredients().add(new Ingredient("finely grated orange zestr", new BigDecimal(1), tableSpoonUom,tacosRecipe));
-        tacosRecipe.getIngredients().add(new Ingredient("fresh-squeezed orange juice", new BigDecimal(3), tableSpoonUom,tacosRecipe));
-        tacosRecipe.getIngredients().add(new Ingredient("Olive Oil", new BigDecimal(2), tableSpoonUom,tacosRecipe));
-        tacosRecipe.getIngredients().add(new Ingredient("boneless chicken thighs", new BigDecimal(4), tableSpoonUom,tacosRecipe));
+        tacosRecipe.addIngredient(new Ingredient("Ancho Chili Powder", new BigDecimal(2), teaSpoonUom));
+        tacosRecipe.addIngredient(new Ingredient("Dried Oregano", new BigDecimal(1), teaSpoonUom));
+        tacosRecipe.addIngredient(new Ingredient("Dried Cumin", new BigDecimal(1), teaSpoonUom));
+        tacosRecipe.addIngredient(new Ingredient("Sugar", new BigDecimal(1), teaSpoonUom));
+        tacosRecipe.addIngredient(new Ingredient("Salt", new BigDecimal(".5"), teaSpoonUom));
+        tacosRecipe.addIngredient(new Ingredient("Clove of Garlic, Choppedr", new BigDecimal(1), eachUom));
+        tacosRecipe.addIngredient(new Ingredient("finely grated orange zestr", new BigDecimal(1), tableSpoonUom));
+        tacosRecipe.addIngredient(new Ingredient("fresh-squeezed orange juice", new BigDecimal(3), tableSpoonUom));
+        tacosRecipe.addIngredient(new Ingredient("Olive Oil", new BigDecimal(2), tableSpoonUom));
+        tacosRecipe.addIngredient(new Ingredient("boneless chicken thighs", new BigDecimal(4), tableSpoonUom));
 
         tacosRecipe.getCategories().add(americanCategory);
         tacosRecipe.getCategories().add(mexicanCategory);
