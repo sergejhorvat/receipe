@@ -1,4 +1,4 @@
-package com.shorvat.receipe.domain;
+package com.shorvat.recipe.domain;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -9,7 +9,6 @@ public class Ingredient {
     @Id
     @GeneratedValue(strategy =  GenerationType.IDENTITY)
     private Long id;
-
     private String description;
     private BigDecimal amount;
 
@@ -18,6 +17,13 @@ public class Ingredient {
 
     @OneToOne(fetch = FetchType.EAGER) // Load every time.
     private UnitOfMeasure uom;
+
+    public Ingredient(String description, BigDecimal amount, UnitOfMeasure uom, Recipe recipe) {
+        this.description = description;
+        this.amount = amount;
+        this.recipe = recipe;
+        this.uom = uom;
+    }
 
     public Long getId() {
         return id;

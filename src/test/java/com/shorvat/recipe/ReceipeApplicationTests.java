@@ -1,4 +1,4 @@
-package com.shorvat.receipe;
+package com.shorvat.recipe;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

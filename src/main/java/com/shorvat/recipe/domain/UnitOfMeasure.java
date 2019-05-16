@@ -1,4 +1,4 @@
-package com.shorvat.receipe.domain;
+package com.shorvat.recipe.domain;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

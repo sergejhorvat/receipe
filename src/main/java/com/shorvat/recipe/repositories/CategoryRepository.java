@@ -1,6 +1,6 @@
-package com.shorvat.receipe.repositories;
+package com.shorvat.recipe.repositories;
 
-import com.shorvat.receipe.domain.Category;
+import com.shorvat.recipe.domain.Category;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.Optional;

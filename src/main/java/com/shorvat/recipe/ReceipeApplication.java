@@ -1,4 +1,4 @@
-package com.shorvat.receipe;
+package com.shorvat.recipe;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

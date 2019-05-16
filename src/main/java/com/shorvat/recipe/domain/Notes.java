@@ -1,4 +1,4 @@
-package com.shorvat.receipe.domain;
+package com.shorvat.recipe.domain;
 
 import javax.persistence.*;
 
@@ -11,10 +11,11 @@ public class Notes {
     private Long id;
 
     @OneToOne  // No cascade definition needed, it's defined in Recipe which is parent so when it's deleted the Note is also deleted.
-    private Recipe receipe;
+    private Recipe recipe;
 
-    @Lob // For large objects, like blob. JPA is goint to expect blob field in DB.
+    @Lob // For large objects, like blob. JPA is going to expect blob field in DB.
     private String recipeNote;
+
 
     public Long getId() {
         return id;
@@ -25,11 +26,11 @@ public class Notes {
     }
 
     public Recipe getReceipe() {
-        return receipe;
+        return recipe;
     }
 
     public void setReceipe(Recipe receipe) {
-        this.receipe = receipe;
+        this.recipe = receipe;
     }
 
     public String getRecipeNote() {
