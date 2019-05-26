@@ -1,8 +1,13 @@
 package com.shorvat.recipe.domain;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 
+@Data
+@EqualsAndHashCode(exclude = {"recipe"})
 @Entity
 public class Ingredient {
 
@@ -12,16 +17,20 @@ public class Ingredient {
     private String description;
     private BigDecimal amount;
 
-    @ManyToOne  // Many Ingredient will have just one Recipe
-    private Recipe recipe;
-
     @OneToOne(fetch = FetchType.EAGER) // Load every time.
     private UnitOfMeasure uom;
+
+    @ManyToOne  // Many Ingredient will have just one Recipe
+    private Recipe recipe;
 
     public Ingredient(String description, BigDecimal amount, UnitOfMeasure uom) {
         this.description = description;
         this.amount = amount;
         this.uom = uom;
+    }
+
+    // Had to put default constructor due to error with lombok and page rendering error
+    public Ingredient() {
     }
 
     // Removed recipe from constructor, we have defined relationship in Recipe class in addIngredients method
@@ -32,43 +41,4 @@ public class Ingredient {
         this.uom = uom;
     }*/
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public BigDecimal getAmount() {
-        return amount;
-    }
-
-    public void setAmount(BigDecimal amount) {
-        this.amount = amount;
-    }
-
-    public Recipe getRecipe() {
-        return recipe;
-    }
-
-    public void setRecipe(Recipe recipe) {
-        this.recipe = recipe;
-    }
-
-    public UnitOfMeasure getUom() {
-        return uom;
-    }
-
-    public void setUom(UnitOfMeasure uom) {
-        this.uom = uom;
-    }
 }
