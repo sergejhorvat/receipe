@@ -10,6 +10,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class ReceipeApplicationTests {
 
     @Test
+    // contextLoad brings up all Spring context for app,
+    // is it loads ok test for contextLoad is passed
     public void contextLoads() {
     }
 

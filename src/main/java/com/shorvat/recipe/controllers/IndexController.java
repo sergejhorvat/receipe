@@ -28,7 +28,7 @@ public class IndexController {
 
     @RequestMapping({"","/","index"})
     public String getIndexPage(Model model){
-        log.debug("Getting Index page!");
+        log.debug("IndexController : Getting Index page!");
         /*Optional<Category> categoryOptional = categoryRepository.findByDescription("American");
         Optional<UnitOfMeasure> unitOfMeasureOptional = unitOfMeasureRepository.findByDescription("Teaspoon");
         //Optional<Recipe> recipeOptional = recipeRepository.fin*/
