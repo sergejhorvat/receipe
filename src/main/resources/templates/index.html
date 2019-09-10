@@ -40,24 +40,23 @@
                             <tr>
                                 <th>ID</th>
                                 <th>Description</th>
+                                <th>View</th>
                             </tr>
                             </thead>
+                            <tr th:remove="all">
+                                <td>Goodness 1!!</td>
+                            </tr>
+                            <tr th:remove="all">
+                                <td>Goodness 2!!</td>
+                            </tr>
                             <tr th:each="recipe : ${recipes}">
+                                <!-- Tell IntelliJ  what kind of variable is recipe so intelli sense can do auto complete -->
+                                <!--/*@thymesVar id="recipe" type="com.shorvat.recipe.domain.Recipe"*/-->
                                 <td th:text="${recipe.id}">3</td>
                                 <td th:text="${recipe.description}">Goodness 3!!</td>
+                                <td><a href="#" th:href="@{'recipe/show/' + ${recipe.id}}">View</a>
+                                </td>
                             </tr>
-
-                            <tr th:remove="all">
-                                <td th:text="${recipe.id}">1</td>
-                                <td th:text="${recipe.description}">Goodness 1!!</td>
-                            </tr>
-
-                            <tr th:remove="all">
-                                <td th:text="${recipe.id}">2</td>
-                                <td th:text="${recipe.description}">Goodness 2!!</td>
-                            </tr>
-
-
                         </table>
                     </div>
                 </div>

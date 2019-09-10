@@ -70,6 +70,10 @@
             <artifactId>jquery</artifactId>
             <version>3.4.1</version>
         </dependency>
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+        </dependency>
 
     </dependencies>
 
