@@ -18,8 +18,10 @@ public class RecipeController {
     }
 
     @RequestMapping("/recipe/show/{id}")
+    // Use {id} in @Pathvariable (Multiple variables could be used)
     public String showById(@PathVariable String id, Model model){
 
+        // Adding model attribute called "recipe" and asking recipe Service to get that by id
         model.addAttribute("recipe", recipeService.findById(Long.valueOf(id)));
         return "recipe/show";
     }
