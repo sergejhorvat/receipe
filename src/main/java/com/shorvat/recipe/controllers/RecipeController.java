@@ -1,12 +1,10 @@
 package com.shorvat.recipe.controllers;
 
+import com.shorvat.recipe.commands.RecipeCommand;
 import com.shorvat.recipe.services.RecipeService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class RecipeController {
@@ -26,21 +24,22 @@ public class RecipeController {
         return "recipe/show";
     }
 
-   /* @RequestMapping("recipe/new")
+    // Mapping for form view
+    @RequestMapping("recipe/new")
     public String newRecipe(Model model){
         model.addAttribute("recipe", new RecipeCommand());
 
         return "recipe/recipeform";
     }
 
+    // Mapping for saving post on form from Spring 4.3
     @PostMapping("recipe")
+    // Other way to map post on "recipe" from Spring 4
+    // @RequestMapping(value = "recipe", method = RequestMethod.POST)
     public String saveOrUpdate(@ModelAttribute RecipeCommand commands){
         RecipeCommand savedCommand = recipeService.saveRecipeCommand(commands);
 
+        // redirect to specific recipe url after save and persistance have been made
         return "redirect:/recipe/show/" + savedCommand.getId();
-    }*/
-
-
-
-
+    }
 }
