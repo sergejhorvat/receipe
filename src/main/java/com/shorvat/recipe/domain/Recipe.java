@@ -47,8 +47,11 @@ public class Recipe {
 
 
     public void setNotes(Notes notes) {
-        this.notes = notes;
-        notes.setRecipe(this); // added to create bidirectional relationship between Notes nad Recipe while setting Note for recipe
+        // Insert null value checking if notes are not passed, no no null pointer error occurs.
+        if(notes != null) {
+            this.notes = notes;
+            notes.setRecipe(this); // added to create bidirectional relationship between Notes nad Recipe while setting Note for recipe
+        }
     }
 
     public Recipe addIngredient(Ingredient ingredient){

@@ -15,7 +15,7 @@ public class RecipeController {
         this.recipeService = recipeService;
     }
 
-    @RequestMapping("/recipe/show/{id}")
+    @RequestMapping("/recipe/{id}/show")
     // Use {id} in @Pathvariable (Multiple variables could be used)
     public String showById(@PathVariable String id, Model model){
 
@@ -29,7 +29,14 @@ public class RecipeController {
     public String newRecipe(Model model){
         model.addAttribute("recipe", new RecipeCommand());
 
-        return "recipe/recipeform";
+        return "/recipe/recipeform";
+    }
+
+    @RequestMapping("/recipe/{id}/update")
+    public String updateRecipe(@PathVariable String id, Model model){
+        model.addAttribute("recipe",new RecipeCommand());
+
+        return "/recipe/recipeform";
     }
 
     // Mapping for saving post on form from Spring 4.3
@@ -40,6 +47,6 @@ public class RecipeController {
         RecipeCommand savedCommand = recipeService.saveRecipeCommand(commands);
 
         // redirect to specific recipe url after save and persistance have been made
-        return "redirect:/recipe/show/" + savedCommand.getId();
+        return "redirect:/recipe/" + savedCommand.getId() + "/show";
     }
 }

@@ -13,6 +13,8 @@ public interface RecipeService {
 
     Recipe findById(Long l);
 
+    RecipeCommand findCommandById(Long l);
+
     // @Transactional added when we have from RecipeServiceImpl added function definition.
     RecipeCommand saveRecipeCommand(RecipeCommand command);
 }
