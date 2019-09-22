@@ -5,7 +5,9 @@ import com.shorvat.recipe.services.RecipeService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Controller
 public class RecipeController {
 
@@ -15,6 +17,7 @@ public class RecipeController {
         this.recipeService = recipeService;
     }
 
+    @GetMapping
     @RequestMapping("/recipe/{id}/show")
     // Use {id} in @Pathvariable (Multiple variables could be used)
     public String showById(@PathVariable String id, Model model){
@@ -25,12 +28,14 @@ public class RecipeController {
     }
 
     // Mapping for form view
+    @GetMapping
     @RequestMapping("recipe/new")
     public String newRecipe(Model model){
         model.addAttribute("recipe", new RecipeCommand());
         return "recipe/recipeform";
     }
 
+    @GetMapping
     @RequestMapping("/recipe/{id}/update")
     public String updateRecipe(@PathVariable String id, Model model){
         model.addAttribute("recipe",recipeService.findCommandById(Long.valueOf(id)));
@@ -38,7 +43,8 @@ public class RecipeController {
     }
 
     // Mapping for saving post on form from Spring 4.3
-    @PostMapping("recipe")
+    @PostMapping
+    @RequestMapping("recipe")
     // Other way to map post on "recipe" from Spring 4
     // @RequestMapping(value = "recipe", method = RequestMethod.POST)
     public String saveOrUpdate(@ModelAttribute RecipeCommand commands){
@@ -46,5 +52,14 @@ public class RecipeController {
 
         // redirect to specific recipe url after save and persistance have been made
         return "redirect:/recipe/" + savedCommand.getId() + "/show";
+    }
+
+    @GetMapping
+    @RequestMapping("recipe/{id}/delete")
+    public String deleteById(@PathVariable String id){
+
+        recipeService.deleteById(Long.valueOf(id));
+        log.debug("Deleting id: " + id);
+        return("redirect:/");
     }
 }

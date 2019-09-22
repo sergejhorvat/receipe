@@ -17,4 +17,8 @@ public interface RecipeService {
 
     // @Transactional added when we have from RecipeServiceImpl added function definition.
     RecipeCommand saveRecipeCommand(RecipeCommand command);
+
+    //RecipeCommand testDeleteById(RecipeCommand command);
+
+    void deleteById(Long idToDelete);
 }

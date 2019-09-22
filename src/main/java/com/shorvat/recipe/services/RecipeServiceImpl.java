@@ -63,4 +63,11 @@ public class RecipeServiceImpl implements RecipeService{
         return recipeToRecipeCommand.convert(savedRecipe);
     }
 
+    @Override
+    @Transactional
+    public void deleteById(Long idToDelete){
+        // Calls Spring Data JPA repository to delete that from hibernate
+        recipeRepository.deleteById(idToDelete);
+    }
+
 }

@@ -55,7 +55,7 @@ public class RecipeServiceImplTest {
     }
 
     @Test
-    public void getRecipes() {
+    public void getRecipesTest() {
 
         // create recipe object and set to sent and retrive in test
         Recipe recipe = new Recipe();
@@ -72,5 +72,16 @@ public class RecipeServiceImplTest {
 
         // Verify interaction that recipeRepository was called ONLY once
         verify(recipeRepository,times(1)).findAll();
+    }
+
+    @Test
+    public void testDeleteById() throws Exception{
+
+        // Given
+        Long idToDelete = Long.valueOf(2L);
+        // When
+        recipeService.deleteById(idToDelete);
+        // Then
+        verify(recipeRepository, times(1)).deleteById(anyLong());
     }
 }
