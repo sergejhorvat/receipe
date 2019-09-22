@@ -109,7 +109,7 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
                 "\n" +
                 "Add the chopped onion, cilantro, black pepper, and chiles. Chili peppers vary individually in their hotness. So, start with a half of one chili pepper and add to the guacamole to your desired degree of hotness.\n" +
                 "\n" +
-                "Remember that much of this is done to taste because of the variability in the fresh ingredients. Start with this recipe and adjust to your taste.\n" +
+                "Remember that much of this is done to taste because of the variability in the fresh ingredient. Start with this recipe and adjust to your taste.\n" +
                 "\n" +
                 "4 Cover with plastic and chill to store: Place plastic wrap on the surface of the guacamole cover it and to prevent air reaching it. (The oxygen in the air causes oxidation which will turn the guacamole brown.) Refrigerate until ready to serve.\n" +
                 "\n" +
@@ -127,7 +127,7 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
                 "\n" +
                 "Feel free to experiment! One classic Mexican guacamole has pomegranate seeds and chunks of peaches in it (a Diana Kennedy favorite). Try guacamole with added pineapple, mango, or strawberries (see our Strawberry Guacamole).\n" +
                 "\n" +
-                "The simplest version of guacamole is just mashed avocados with salt. Don't let the lack of availability of other ingredients stop you from making guacamole.\n" +
+                "The simplest version of guacamole is just mashed avocados with salt. Don't let the lack of availability of other ingredient stop you from making guacamole.\n" +
                 "\n" +
                 "To extend a limited supply of avocados, add either sour cream or cottage cheese to your guacamole dip. Purists may be horrified, but so what? It tastes great.\n" +
                 "\n" +
@@ -138,7 +138,7 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
         //guacamoleNote.setReceipe(guacamoleRecipe); // relationshiop added in addIngredient method of Recipe Class
         guacamoleRecipe.setNotes(guacamoleNote); // set relations
 
-        // set ingredients
+        // set ingredient
         guacamoleRecipe.addIngredient(new Ingredient("ripe avocado",new BigDecimal(2),eachUom));
         guacamoleRecipe.addIngredient(new Ingredient("Kosher salt", new BigDecimal(.5),teaSpoonUom));
         guacamoleRecipe.addIngredient(new Ingredient("fresh lemon jucie", new BigDecimal(2),tableSpoonUom));
