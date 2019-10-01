@@ -2,7 +2,6 @@ package com.shorvat.recipe.converters;
 
 import com.shorvat.recipe.commands.IngredientCommand;
 import com.shorvat.recipe.domain.Ingredient;
-
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
