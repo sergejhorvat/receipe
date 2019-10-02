@@ -2,6 +2,8 @@ package com.shorvat.recipe.controllers;
 
 
 import com.shorvat.recipe.commands.IngredientCommand;
+import com.shorvat.recipe.commands.RecipeCommand;
+import com.shorvat.recipe.commands.UnitOfMeasureCommand;
 import com.shorvat.recipe.services.IngredientService;
 import com.shorvat.recipe.services.RecipeService;
 
@@ -46,6 +48,26 @@ public class IngredientController {
                                        Model model){
         model.addAttribute("ingredient", ingredientService.findByRecipeIdAndIngredientId(Long.valueOf(recipeId), Long.valueOf(id)));
         return("recipe/ingredient/show");
+    }
+
+    @GetMapping
+    @RequestMapping("recipe/{recipeId}/ingredient/new")
+    public String newRecipe(@PathVariable String recipeId, Model model){
+
+        // make shure toi have good id value
+        RecipeCommand recipeCommand = recipeService.findCommandById(Long.valueOf(recipeId));
+
+        // need to return back parent id for hidden form property
+        IngredientCommand ingredientCommand = new IngredientCommand();
+        ingredientCommand.setRecipeId(Long.valueOf(recipeId));
+        model.addAttribute("ingredient", ingredientCommand);
+
+        // init uom
+        ingredientCommand.setUom(new UnitOfMeasureCommand());
+        model.addAttribute("uomList", unitOfMeasureService.listAllUoms());
+
+        // return view
+        return "recipe/ingredient/ingredientform";
     }
 
     @GetMapping

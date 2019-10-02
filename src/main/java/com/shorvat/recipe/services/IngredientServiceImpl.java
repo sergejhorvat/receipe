@@ -83,23 +83,37 @@ public class IngredientServiceImpl implements IngredientService {
                 ingredientFound.setDescription(command.getDescription());
                 ingredientFound.setAmount(command.getAmount());
                 ingredientFound.setUom(unitOfMeasureRepository
-                .findById(command.getUom().getId())
-                .orElseThrow(()-> new RuntimeException("UOM not found!"))); // todo address this
+                    .findById(command.getUom().getId())
+                    .orElseThrow(()-> new RuntimeException("UOM not found!"))); // todo address this
             } else {
                 // Add new ingredient
-                recipe.addIngredient(ingredientCommandToIngredient.convert(command));
+                // make the relationship both ways
+               Ingredient ingredient = ingredientCommandToIngredient.convert(command);
+               ingredient.setRecipe(recipe);
+               recipe.addIngredient(ingredient);
             }
 
             // Save receipe object with hibernate
             Recipe savedRecipe = recipeRepository.save(recipe);
 
-            // todo check for fail
+            // Works if there is a persistent entity, but on brand new ingredient we do not have id value
+            Optional<Ingredient> savedIngredientOptional = savedRecipe.getIngredients().stream()
+                    .filter(recipeIngredients -> recipeIngredients.getId().equals(command.getId()))
+                    .findFirst();
+
+            // check by description
+            // we would test both in real world id and description
+            if(!savedIngredientOptional.isPresent()){
+                // not totaly safe but best guess
+                savedIngredientOptional = savedRecipe.getIngredients().stream()
+                        .filter(recipeIngredients -> recipeIngredients.getDescription().equals(command.getDescription()))
+                        .filter(recipeIngredients -> recipeIngredients.getAmount().equals(command.getAmount()))
+                        .filter(recipeIngredients -> recipeIngredients.getUom().getId().equals(command.getUom().getId()))
+                        .findFirst();
+            }
 
             // Return command object
-            return ingredientToIngredientCommand.convert(savedRecipe.getIngredients().stream()
-                    .filter(recipeIngredients -> recipeIngredients.getId().equals(command.getId()))
-                    .findFirst()
-                    .get());
+            return ingredientToIngredientCommand.convert(savedIngredientOptional.get());
         }
     }
 }
