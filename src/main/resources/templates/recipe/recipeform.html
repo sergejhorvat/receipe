@@ -22,7 +22,7 @@
 </head>
 <body>
 <!-- Tell IntelliJ  what kind of variable is recipe so intelli sense can do auto complete -->
-<!--/*@thymesVar id="recipe" type="com.shorvat.recipe.domain.Recipe"*/-->
+<!--/*@thymesVar id="recipe" type="com.shorvat.recipe.domain"*/-->
 <div class="container-fluid" style="margin-top: 20px">
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
@@ -70,10 +70,12 @@
                                 </div>
                                 <div class="col-md-3 form-group">
                                     <label>Difficulty:</label>
-                                    <select class="form-control">
-                                        <option>Easy</option>
-                                        <option>Medium</option>
-                                        <option>Hard</option>
+                                    <select class="form-control" th:field="*{difficulty}">
+                                        <option th:each="difficultyValue : ${T(com.shorvat.recipe.domain.Difficulty).values()}"
+                                        th:value="${difficultyValue.name()}"
+                                                th:text="${difficultyValue.name()}">
+                                            val
+                                        </option>
                                     </select>
                                 </div>
                             </div>
