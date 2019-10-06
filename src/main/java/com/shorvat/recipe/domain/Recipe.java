@@ -12,8 +12,8 @@ public class Recipe {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)  // support autogeration of sequences (most DB supports it)
-    private Long id;
 
+    private Long id;
     private String description;
     private Integer prepTime;
     private Integer cookTime;

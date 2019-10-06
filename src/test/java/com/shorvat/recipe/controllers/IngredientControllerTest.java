@@ -1,8 +1,11 @@
-package com.shorvat.recipe.services;
+package com.shorvat.recipe.controllers;
 
 import com.shorvat.recipe.commands.IngredientCommand;
 import com.shorvat.recipe.commands.RecipeCommand;
 import com.shorvat.recipe.controllers.IngredientController;
+import com.shorvat.recipe.services.IngredientService;
+import com.shorvat.recipe.services.RecipeService;
+import com.shorvat.recipe.services.UnitOfMeasureService;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -75,6 +78,31 @@ public class IngredientControllerTest {
     }
 
     @Test
+    public void testNewIngredientForm() throws Exception{
+
+        // given (create test variable)
+        RecipeCommand recipeCommand = new RecipeCommand();
+        // Set the id for object
+        recipeCommand.setId(1L);
+
+        // When @Mock classes methods are called return given object
+        when(recipeService.findCommandById(anyLong())).thenReturn(recipeCommand);
+        // When @Mock classes methods are called return all objects
+        when(unitOfMeasureService.listAllUoms()).thenReturn(new HashSet<>());
+
+
+        // then - call @Mock MVC service to perform HTTP get on service via URL and
+        // check response created with given @Mock data to see if it is expected HTTP response
+        mockMvc.perform(get("/recipe/1/ingredient/new"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("recipe/ingredient/ingredientform"))
+                .andExpect(model().attributeExists("ingredient"))
+                .andExpect(model().attributeExists("uomList"));
+
+        verify(recipeService, times(1)).findCommandById(anyLong());
+    }
+
+    @Test
     public void testUpdateIngredientForm() throws Exception{
 
         // given
@@ -110,5 +138,19 @@ public class IngredientControllerTest {
         .param("description","some string"))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(view().name("redirect:/recipe/2/ingredient/3/show"));
-        }
+    }
+
+    @Test
+    public void testDeleteIngredient() throws Exception{
+
+        // Tests should be written before tha implementation, for test driven development
+        // using get because its available trough HTML and javascript
+        mockMvc.perform(get("/recipe/2/ingredient/3/delete")
+        )
+                .andExpect(status().is3xxRedirection())
+                .andExpect(view().name("redirect:/recipe/2/ingredients/")
+                );
+
+        verify(ingredientService, times(1)).deleteIngredientById(anyLong(),anyLong());
+    }
 }

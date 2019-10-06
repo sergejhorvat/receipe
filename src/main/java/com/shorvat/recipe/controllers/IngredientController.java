@@ -4,6 +4,7 @@ package com.shorvat.recipe.controllers;
 import com.shorvat.recipe.commands.IngredientCommand;
 import com.shorvat.recipe.commands.RecipeCommand;
 import com.shorvat.recipe.commands.UnitOfMeasureCommand;
+import com.shorvat.recipe.domain.Ingredient;
 import com.shorvat.recipe.services.IngredientService;
 import com.shorvat.recipe.services.RecipeService;
 
@@ -94,6 +95,23 @@ public class IngredientController {
         log.debug("saved ingredient id: " + savedCommand.getId());
 
         return("redirect:/recipe/" + savedCommand.getRecipeId() + "/ingredient/" + savedCommand.getId() + "/show");
+    }
+
+
+    // homework delete ingredient
+    @GetMapping
+    @RequestMapping("/recipe/{recipeId}/ingredient/{id}/delete")
+    public String deleteRecipeIngredient(@PathVariable String recipeId,
+                                         @PathVariable String id){
+
+       // Call service to delete ingredient by values of is
+        ingredientService.deleteIngredientById(Long.valueOf(recipeId),
+                                                Long.valueOf(id));
+
+
+        // Return list of ingredients for recipe
+        return("redirect:/recipe/" + recipeId + "/ingredients/");
+
     }
 
 }

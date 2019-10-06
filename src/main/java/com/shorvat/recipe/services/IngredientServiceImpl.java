@@ -55,6 +55,7 @@ public class IngredientServiceImpl implements IngredientService {
         return ingredientCommandOptional.get();
     }
 
+
     @Override
     @Transactional
     public IngredientCommand saveIngredientCommand(IngredientCommand command) {
@@ -115,5 +116,40 @@ public class IngredientServiceImpl implements IngredientService {
             // Return command object
             return ingredientToIngredientCommand.convert(savedIngredientOptional.get());
         }
+    }
+
+
+    @Override
+    @Transactional
+    public void deleteIngredientById(Long recipeId, Long ingredientId){
+
+        // Find the recipe that we want to delete ingredient
+        Optional<Recipe> recipeOptional = recipeRepository.findById(recipeId);
+
+        if (recipeOptional.isPresent()){
+            Recipe recipe = recipeOptional.get();
+
+            Optional<Ingredient> ingredientOptional = recipe
+                    .getIngredients()
+                    .stream()
+                    .filter(ingredient -> ingredient.getId().equals(ingredientId))
+                    .findFirst();
+
+            if(ingredientOptional.isPresent()) {
+                log.debug("Ingredient is found: " + ingredientId);
+                Ingredient ingredientToDelete = ingredientOptional.get(); // get Ingredient property from recipe
+                String deletedIngredientDesc =  ingredientToDelete.getDescription();
+                ingredientToDelete.setRecipe(null); // break all bidirectional connections in persistance before delete
+                recipe.getIngredients().remove(ingredientOptional.get()); // break all bidirectional connections in persistance before delete
+                recipeRepository.save(recipe); // save new recipe state
+
+                log.debug("DELETETED  Ingredient " + deletedIngredientDesc );
+            }
+        } else {
+            log.debug("Recipe not found! id: " + recipeId);
+        }
+
+
+
     }
 }
