@@ -55,8 +55,19 @@ public class RecipeControllerTest {
         mockMvc.perform(get("/recipe/1/show"))
                 .andExpect(status().isNotFound())
                 .andExpect(view().name("404error")); // added for method from controller to handle error by showing 4040 error page
-
     }
+
+    @Test
+    public void testNumberFormatException() throws Exception{
+
+        when(recipeService.findById(anyLong())).thenThrow(NotFoundException.class);
+
+        mockMvc.perform(get("/recipe/ab/show"))
+                .andExpect(status().isBadRequest())
+                .andExpect(view().name("400error")); // added for method from controller to handle error by showing 4040 error page
+    }
+
+
 
     @Test
     public void testGetNewRecipeForm() throws Exception{
