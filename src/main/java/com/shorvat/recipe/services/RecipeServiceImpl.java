@@ -4,8 +4,10 @@ import com.shorvat.recipe.commands.RecipeCommand;
 import com.shorvat.recipe.converters.RecipeCommandToRecipe;
 import com.shorvat.recipe.converters.RecipeToRecipeCommand;
 import com.shorvat.recipe.domain.Recipe;
+import com.shorvat.recipe.exceptions.NotFoundException;
 import com.shorvat.recipe.repositories.RecipeRepository;
 import lombok.extern.slf4j.Slf4j;
+import org.assertj.core.condition.Not;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -42,7 +44,8 @@ public class RecipeServiceImpl implements RecipeService{
         Optional<Recipe> recipeOptional = recipeRepository.findById(l);
 
         if(!recipeOptional.isPresent()){
-            throw new RuntimeException("Recipe Not Found!");
+            //throw new RuntimeException("Recipe Not Found!");
+            throw new NotFoundException("Recipe Not Found");
         }
         return recipeOptional.get();
     }

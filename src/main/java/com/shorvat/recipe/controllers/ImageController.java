@@ -50,6 +50,7 @@ public class ImageController {
         RecipeCommand recipeCommand = recipeService.findCommandById(Long.valueOf(id));
 
         // converting from byteArray box to primitive
+        //todo handle if there is no image, nullpointer error
         byte[] byteArray = new byte[recipeCommand.getImage().length];
         int i = 0;
         for (Byte wrappedByte : recipeCommand.getImage()) {

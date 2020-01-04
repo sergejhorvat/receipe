@@ -52,6 +52,7 @@ public class RecipeServiceImplTest {
 
         assertNotNull("Null recipe returned", recipeReturned);
         verify(recipeRepository,times(1)). findById(anyLong());
+        verify(recipeRepository, never()).findAll(); // added for custom NotFoundException class
     }
 
     @Test
