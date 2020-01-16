@@ -38,7 +38,9 @@ public class ImageControllerTest {
 
         // insert dependency manually
         controller = new ImageController(imageService, recipeService);
-        mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
+        mockMvc = MockMvcBuilders.standaloneSetup(controller)
+                .setControllerAdvice(new ControllerExceptionHandler()) // added not to be depenndant of Spring context, so UnitTest ccan be done in own
+                .build();
     }
 
     @Test
@@ -105,5 +107,13 @@ public class ImageControllerTest {
         byte[] responseByte = response.getContentAsByteArray();
 
         assertEquals(s.getBytes().length, responseByte.length);
+    }
+
+    @Test
+    public void testGetImageNumberFormatException() throws Exception{
+
+        mockMvc.perform(get("/recipe/ads/recipeimage"))
+                .andExpect(status().isBadRequest())
+                .andExpect(view().name("400error"));
     }
 }
